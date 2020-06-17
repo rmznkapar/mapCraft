@@ -541,6 +541,12 @@ export default {
   height: 100%;
   cursor: pointer;
 }
+#europe::before{
+  position: absolute;
+  content: 'mapcraft.netlify.app';
+  font-family: 'Arial';
+  font-size: 17px;
+}
 #scaler{
   position: relative;
   display: flex;
