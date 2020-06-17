@@ -8,19 +8,6 @@
         <span class="label-text">{{ label.text }}</span>
       </li>
     </ul>
-        <!-- <ul class="label-box">
-        <li class="label">Item 1</li>
-        <li class="label">Item 2</li>
-        <li class="label">Item 3</li>
-        <li class="label">Item 4
-           <ul>
-                <li class="label">Sub Item 1</li>
-                <li class="label">Sub Item 2</li>
-                <li class="label">Sub Item 3</li>
-                <li class="label">Sub Item 4</li>
-           </ul>
-        </li>
-    </ul> -->
   </div>
 </template>
 
@@ -45,10 +32,11 @@ export default {
   top: 20px;
   right: 125px;
   background: #ffffffcf;
-  padding: 10px 22.5px;
+  padding: 10px 20px;
   box-shadow: 2px 2px 15px #00000021;
   border-radius: 5px;
-  max-width: 165px;
+  max-width: 180px;
+  font-size: 15px;
   /* border: 1px solid #7a7a7a; */
 }
 .title{

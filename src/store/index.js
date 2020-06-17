@@ -23,7 +23,8 @@ export default new Vuex.Store({
     countryList: json,
     nowLabelColor: 'rgb(255, 255, 255)',
     coloredCountry: [],
-    labels: []
+    labels: [],
+    firstSave: true
   },
   getters: {
     activeColor: state => {
@@ -84,9 +85,9 @@ export default new Vuex.Store({
       // const svgMap = document.getElementById('svg3157')
       console.log(scaler)
       html2canvas(mapBox, { width: scaler.width, height: scaler.height, x: scaler.x }).then(function (canvas) {
-        var ctx = canvas.getContext('2d')
-        ctx.font = '17px Arial'
-        ctx.fillText('mapcraft.netlify.app', scaler.x + 20, 20)
+        // var ctx = canvas.getContext('2d')
+        // ctx.font = '15px Arial'
+        // ctx.fillText('mapcraft.netlify.app', scaler.x + 20, 20)
         var dataURL = canvas.toDataURL('image/jpeg', 1.0)
         var a = document.createElement('a')
         a.href = dataURL
