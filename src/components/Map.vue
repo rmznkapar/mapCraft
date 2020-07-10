@@ -5,23 +5,24 @@
           <button v-on:click="saveMap()">savemap</button>
       </div> -->
       <canvas width="4600" height="3200" id="canvas"></canvas>
-      <Europe v-on:click.native="clickCountry($event)" />
-      <caption-box :texts="texts" :labels="labels" />
+      <Europe v-bind:texts="texts" v-bind:labels="labels" v-on:click.native="clickCountry($event)" />
+      <!-- <caption-box :texts="texts" :labels="labels" /> -->
       <div>{{ hoverCountryId }}</div>
+      <div id="image-box"></div>
   </div>
 </template>
 
 <script>
 import Europe from './maps/Europe.vue'
-import CaptionBox from './uis/CaptionBox.vue'
+// import CaptionBox from './uis/CaptionBox.vue'
 
 import { mapGetters, mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'Map',
   components: {
-    Europe,
-    CaptionBox
+    Europe
+    // CaptionBox
   },
   computed: {
     ...mapGetters(['activeColor', 'mapColors', 'choosenCountry', 'texts', 'labels', 'coloredCountry', 'countryList']),
@@ -138,7 +139,7 @@ export default {
       deep: true,
       handler: function () {
         const countries = document.getElementById(this.mapLayerId).getElementsByTagName('path')
-        document.getElementById(this.mapId).style.backgroundColor = this.mapColors.background
+        document.getElementById('background').style.fill = this.mapColors.background
 
         for (let i = 0; i < countries.length; i++) {
           const isColored = this.coloredCountry.filter(obj => obj.id === countries[i].id).length

@@ -9,13 +9,15 @@
       xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
       xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
       version="1.1"
-      width="1100px"
-      height="800px"
-      viewBox="0 0 675 600"
+      width="2100px"
+      height="1600px"
+      viewBox="120 0 530 600"
       id="svg3157"
       class="svgFull"
       inkscape:version="0.48.5 r10040"
       sodipodi:docname="Countries of Europe cropped.svg">
+      <rect id="background" width="145%" height="100%" fill="white" />
+
       <sodipodi:namedview
         pagecolor="#ffffff"
         bordercolor="#666666"
@@ -517,6 +519,61 @@
           id="ocean"
           style="fill:none;stroke-width:6.11153841;stroke-miterlimit:4;stroke-dasharray:none" />
       </g>
+      <foreignObject id="foreign" style="overflow: visible;" :width="width" :height="height" x="550" y="10">
+        <div
+          xmlns="http://www.w3.org/1999/xhtml"
+          style="
+            font-family: Avenir, Helvetica, Arial, sans-serif;
+            background: #ffffffcf;
+            padding: 10px 20px;
+            box-shadow: 2px 2px 15px #00000021;
+            border-radius: 5px;
+            max-width: 180px;
+            font-size: 15px;"
+          id="caption-box"
+          ref="captionBox"
+        >
+          <p class="title" style="font-weight: bold;">{{ texts.title }}</p>
+          <p
+            class="desc"
+            style="  font-weight: 400;
+    margin-top: 5px;"
+          >
+            {{ texts.desc }}
+          </p>
+          <ul id="label-box" class="label-box" style="list-style-type: none; padding: 0;">
+            <li
+              class="label"
+              style="  display: flex;
+                  text-align: -webkit-match-parent;
+    margin: 0px 2px;
+    padding: 5px 0px;"
+              v-for="label in labels"
+              :key="label.id"
+            >
+              <div
+                class="colorBox"
+                style="  display: inline-block;
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;"
+                :style="{backgroundColor: label.color}"
+              ></div>
+              <span
+                class="label-text"
+                style="  margin-left: 5px;
+    margin-top: 1.25px;
+    font-size: 15px;
+    display: block;
+    max-width: 135px;
+    flex: 30 5 auto;
+    text-align: left;"
+                >{{ label.text }}</span
+              >
+            </li>
+          </ul>
+        </div>
+      </foreignObject>
     </svg>
   </div>
 </template>
@@ -524,9 +581,11 @@
 <script>
 export default {
   name: 'Europe',
+  props: ['texts', 'labels'],
   data: function () {
     return {
-
+      height: '100px',
+      width: '180px'
     }
   }
 }
@@ -535,11 +594,13 @@ export default {
 <style scoped>
 .tablo{
   position: relative;
+  width: 100%;
 }
 .svgFull{
   width: 80%;
   height: 100%;
   cursor: pointer;
+  display: initial;
 }
 #europe::before{
   position: absolute;
@@ -552,4 +613,47 @@ export default {
   display: flex;
   justify-content: center;
 }
+#foreign{
+  position: absolute;
+  top: 20px;
+  overflow: visible;
+  right: 125px;
+}
+/* #caption-box{
+  background: #ffffffcf;
+  padding: 10px 20px;
+  box-shadow: 2px 2px 15px #00000021;
+  border-radius: 5px;
+  max-width: 180px;
+  font-size: 15px;
+  border: 1px solid #7a7a7a;
+}
+.title{
+  font-weight: bold;
+}
+.desc{
+  font-weight: 400;
+  margin-top: 5px;
+}
+.colorBox{
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+.label{
+  float: left;
+  display: flex;
+  margin: 0px 2px;
+  padding: 5px 0px;
+}
+.label-text{
+  margin-left: 5px;
+  margin-top: 1.25px;
+  font-size: 15px;
+  display: block;
+  max-width: 135px;
+  flex: 30 5 auto;
+  text-align: left;
+} */
 </style>
