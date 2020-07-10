@@ -60,11 +60,6 @@ export default {
     ...mapMutations(['CHOOSE_MAPCOLORS', 'CHOOSE_TEXTS', 'CHOOSE_LABELS']),
     ...mapActions(['RENDER_MAP']),
     saveMap: function () {
-      // const ctx = document.getElementById('canvas').getContext('2d')
-      // const cptBox = document.getElementById('caption-box')
-      // ctx.beginPath()
-      // ctx.rect(20, 20, cptBox.offsetWidth * 4.5, cptBox.offsetHeight * 4.5)
-      // ctx.stroke()
     }
   },
   watch: {

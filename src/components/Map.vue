@@ -1,12 +1,7 @@
 <template>
   <div @mousemove="hoverCountry($event)" id="map-box">
-      <!-- <div>
-          <button v-on:click="changeColor()">basss</button>
-          <button v-on:click="saveMap()">savemap</button>
-      </div> -->
       <canvas width="4600" height="3200" id="canvas"></canvas>
       <Europe v-bind:texts="texts" v-bind:labels="labels" v-on:click.native="clickCountry($event)" />
-      <!-- <caption-box :texts="texts" :labels="labels" /> -->
       <div>{{ hoverCountryId }}</div>
       <div id="image-box"></div>
   </div>
@@ -14,7 +9,6 @@
 
 <script>
 import Europe from './maps/Europe.vue'
-// import CaptionBox from './uis/CaptionBox.vue'
 
 import { mapGetters, mapState, mapMutations } from 'vuex'
 
@@ -186,12 +180,5 @@ export default {
 <style scoped>
 #canvas{
   display: none;
-  /* position: absolute;
-  top: 0;
-  z-index: 2;
-  background: #968aca6b;
-  left: 0;
-  width: 66%;
-  height: 80%; */
 }
 </style>

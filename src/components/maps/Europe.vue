@@ -619,41 +619,4 @@ export default {
   overflow: visible;
   right: 125px;
 }
-/* #caption-box{
-  background: #ffffffcf;
-  padding: 10px 20px;
-  box-shadow: 2px 2px 15px #00000021;
-  border-radius: 5px;
-  max-width: 180px;
-  font-size: 15px;
-  border: 1px solid #7a7a7a;
-}
-.title{
-  font-weight: bold;
-}
-.desc{
-  font-weight: 400;
-  margin-top: 5px;
-}
-.colorBox{
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-}
-.label{
-  float: left;
-  display: flex;
-  margin: 0px 2px;
-  padding: 5px 0px;
-}
-.label-text{
-  margin-left: 5px;
-  margin-top: 1.25px;
-  font-size: 15px;
-  display: block;
-  max-width: 135px;
-  flex: 30 5 auto;
-  text-align: left;
-} */
 </style>
