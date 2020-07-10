@@ -20,7 +20,7 @@ export function ForeignHtmlRenderer (styleSheets) {
       const svg = contentHtml
 
       // convert SVG to data-uri
-      const dataUri = `data:image/svg+xml;base64,${window.btoa(svg)}`
+      const dataUri = `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(svg)))}`
 
       resolve(dataUri)
     })
