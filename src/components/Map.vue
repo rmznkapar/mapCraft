@@ -1,25 +1,47 @@
 <template>
   <div @mousemove="hoverCountry($event)" id="map-box">
-      <canvas width="4600" height="3200" id="canvas"></canvas>
-      <Europe v-bind:texts="texts" v-bind:labels="labels" v-on:click.native="clickCountry($event)" />
-      <div>{{ hoverCountryId }}</div>
-      <div id="image-box"></div>
+    <canvas width="4600" height="3200" id="canvas"></canvas>
+    <Europe
+    v-if="choosenMap === 'Europe'"
+      v-bind:texts="texts"
+      v-bind:labels="labels"
+      v-on:click.native="clickCountry($event)"
+    />
+        <World
+        v-if="choosenMap === 'World'"
+      v-bind:texts="texts"
+      v-bind:labels="labels"
+      v-on:click.native="clickCountry($event)"
+    />
+    <div>{{ hoverCountryId }}</div>
+    <div id="image-box"></div>
   </div>
 </template>
 
 <script>
 import Europe from './maps/Europe.vue'
+import World from './maps/World.vue'
 
 import { mapGetters, mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'Map',
   components: {
-    Europe
+    Europe,
+    World
     // CaptionBox
   },
   computed: {
-    ...mapGetters(['activeColor', 'mapColors', 'choosenCountry', 'texts', 'labels', 'coloredCountry', 'countryList']),
+    ...mapGetters([
+      'activeColor',
+      'mapColors',
+      'choosenCountry',
+      'texts',
+      'labels',
+      'coloredCountry',
+      'countryList',
+      'choosenMap'
+    ]),
     ...mapState(['activeColor', 'countryList'])
   },
   data: function () {
@@ -41,14 +63,19 @@ export default {
   methods: {
     ...mapMutations(['CHOOSE_COLOR']),
     changeColor: function () {
-      const rgb2hex = c => '#' + c.match(/\d+/g).map(x => (+x).toString(16).padStart(2, 0)).join``
+      const rgb2hex = c =>
+        '#' + c.match(/\d+/g).map(x => (+x).toString(16).padStart(2, 0)).join``
       if (this.country !== '') {
-        const ctrList = this.coloredCountry.filter(ctr => ctr.id === this.country)
+        const ctrList = this.coloredCountry.filter(
+          ctr => ctr.id === this.country
+        )
 
         if (this.isShift) {
           const indexCtr = this.coloredCountry.indexOf(ctrList[0])
           this.coloredCountry.splice(indexCtr, 1)
-          document.getElementById(this.country).style.fill = this.mapColors.normal
+          document.getElementById(
+            this.country
+          ).style.fill = this.mapColors.normal
           for (let i = 0; i < this.countryList.length; i++) {
             const ctr = this.countryList[i]
             if (ctr.code === this.country) {
@@ -100,12 +127,23 @@ export default {
     },
     clickCountry: function (event) {
       this.country = event.path[0].id
+      if (this.country.substring(0, 4) === 'path') {
+        this.country = event.path[0].parentNode.id
+      }
+      if (this.country === 'background') {
+        return
+      }
       this.changeColor()
     },
     hoverCountry: function (event) {
-      if (event.path[0].id.length === 2 && this.hoverCountryId !== event.path[0].id) {
+      if (
+        event.path[0].id.length === 2 &&
+        this.hoverCountryId !== event.path[0].id
+      ) {
         // if kaldirlicak europe svg tamamlaninca
-        this.hoverCountryId = this.countryList.filter(ctr => ctr.code === event.path[0].id)
+        this.hoverCountryId = this.countryList.filter(
+          ctr => ctr.code === event.path[0].id
+        )
         if (this.hoverCountryId.length > 0) {
           this.hoverCountryId = this.hoverCountryId[0].name
         }
@@ -132,11 +170,35 @@ export default {
     mapColors: {
       deep: true,
       handler: function () {
-        const countries = document.getElementById(this.mapLayerId).getElementsByTagName('path')
-        document.getElementById('background').style.fill = this.mapColors.background
+        let countries
+        if (this.choosenMap === 'Europe') {
+          countries = document
+            .getElementById(this.mapLayerId).getElementsByTagName('path')
+        } else {
+          countries = document
+            .getElementById(this.mapLayerId).children
+        }
+
+        // for (const [key, value] of Object.entries(countries)) {
+        //   console.log(value)
+        //   countries[key] = value
+        // }
+        // console.log(typeof countries)
+        // countries = countries.map(country => {
+        //   if (country.id.substring(0, 4) === 'path') {
+        //     country = country.parentNode
+        //   }
+        //   return country
+        // })
+
+        document.getElementById(
+          'background'
+        ).style.fill = this.mapColors.background
 
         for (let i = 0; i < countries.length; i++) {
-          const isColored = this.coloredCountry.filter(obj => obj.id === countries[i].id).length
+          const isColored = this.coloredCountry.filter(
+            obj => obj.id === countries[i].id
+          ).length
           if (this.mapColors.stroke !== this.oldVals.stroke) {
             countries[i].style.stroke = this.mapColors.stroke
           }
@@ -157,7 +219,7 @@ export default {
     }
   },
   created: function () {
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', e => {
       if (e.key === 'Control' && !this.isCtrl) {
         this.isCtrl = true
       }
@@ -165,7 +227,7 @@ export default {
         this.isShift = true
       }
     })
-    window.addEventListener('keyup', (e) => {
+    window.addEventListener('keyup', e => {
       if (e.key === 'Control' && this.isCtrl) {
         this.isCtrl = false
       }
@@ -178,7 +240,7 @@ export default {
 </script>
 
 <style scoped>
-#canvas{
+#canvas {
   display: none;
 }
 </style>

@@ -2,6 +2,13 @@
   <div id="sidebar">
     <h2>{{ title }}</h2>
     <ColorPicker />
+    <div class="bar-item input-box">
+      <span>Map: </span>
+      <select v-model="optionMap" id="">
+          <option value="Europe">Europe</option>
+          <option value="World">World</option>
+      </select>
+    </div>
     <SearchInput class="bar-item" />
     <div class="bar-item">
       <span>Stroke Color: </span> <input v-model="mapColors.stroke" type="color">
@@ -38,7 +45,15 @@ export default {
   name: 'SideBar',
   computed: {
     ...mapGetters(['activeColor', 'labels', 'texts']),
-    ...mapState(['activeColor'])
+    ...mapState(['activeColor']),
+    optionMap: {
+      get () {
+        return this.$store.state.choosenMap
+      },
+      set (value) {
+        this.$store.commit('CHOOSE_MAP', value)
+      }
+    }
   },
   components: {
     ColorPicker,
@@ -57,7 +72,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['CHOOSE_MAPCOLORS', 'CHOOSE_TEXTS', 'CHOOSE_LABELS']),
+    ...mapMutations(['CHOOSE_MAPCOLORS', 'CHOOSE_TEXTS', 'CHOOSE_LABELS', 'CHOOSE_MAP']),
     ...mapActions(['RENDER_MAP']),
     saveMap: function () {
     }
@@ -92,6 +107,17 @@ export default {
 }
 .input-box{
   margin-top: 15px;
+}
+.bar-item select{
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid #ced6e0;
+  transition: all 0.3s ease-in-out;
+  font-size: 15px;
+  padding: 10px 15px;
+  background: none;
+  color: #1a3b5d;
 }
 .bar-item input[type="text"]{
   width: 100%;

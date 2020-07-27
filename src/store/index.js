@@ -23,7 +23,8 @@ export default new Vuex.Store({
     nowLabelColor: 'rgb(255, 255, 255)',
     coloredCountry: [],
     labels: [],
-    firstSave: true
+    firstSave: true,
+    choosenMap: 'Europe'
   },
   getters: {
     activeColor: state => {
@@ -49,6 +50,9 @@ export default new Vuex.Store({
     },
     labels: state => {
       return state.labels
+    },
+    choosenMap: state => {
+      return state.choosenMap
     }
   },
   mutations: {
@@ -75,6 +79,9 @@ export default new Vuex.Store({
     },
     CHOOSE_LABELCOLOR (state, color) {
       state.nowLabelColor = color
+    },
+    CHOOSE_MAP (state, map) {
+      state.choosenMap = map
     }
   },
   actions: {
