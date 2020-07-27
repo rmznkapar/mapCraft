@@ -136,13 +136,18 @@ export default {
       this.changeColor()
     },
     hoverCountry: function (event) {
+      let country = event.path[0]
+      if (country.id.substring(0, 4) === 'path') {
+        country = event.path[0].parentNode
+      }
       if (
-        event.path[0].id.length === 2 &&
-        this.hoverCountryId !== event.path[0].id
+        country.id.length === 2 &&
+        this.hoverCountryId !== country.id
       ) {
+        console.log(country.id)
         // if kaldirlicak europe svg tamamlaninca
         this.hoverCountryId = this.countryList.filter(
-          ctr => ctr.code === event.path[0].id
+          ctr => ctr.code === country.id
         )
         if (this.hoverCountryId.length > 0) {
           this.hoverCountryId = this.hoverCountryId[0].name
@@ -178,18 +183,6 @@ export default {
           countries = document
             .getElementById(this.mapLayerId).children
         }
-
-        // for (const [key, value] of Object.entries(countries)) {
-        //   console.log(value)
-        //   countries[key] = value
-        // }
-        // console.log(typeof countries)
-        // countries = countries.map(country => {
-        //   if (country.id.substring(0, 4) === 'path') {
-        //     country = country.parentNode
-        //   }
-        //   return country
-        // })
 
         document.getElementById(
           'background'
