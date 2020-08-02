@@ -9,6 +9,9 @@
           <option value="World">World</option>
       </select>
     </div>
+    <div class="bar-item">
+      <span>Zoom Map</span> <input v-model="zoom" type="range" step="0.25" min="1" max="3">
+    </div>
     <SearchInput class="bar-item" />
     <div class="bar-item">
       <span>Stroke Color: </span> <input v-model="mapColors.stroke" type="color">
@@ -68,16 +71,20 @@ export default {
         normal: '#c0c0c0',
         background: '#ffffff',
         strokeWidth: 5
-      }
+      },
+      zoom: 1
     }
   },
   methods: {
-    ...mapMutations(['CHOOSE_MAPCOLORS', 'CHOOSE_TEXTS', 'CHOOSE_LABELS', 'CHOOSE_MAP']),
+    ...mapMutations(['CHOOSE_MAPCOLORS', 'CHOOSE_TEXTS', 'CHOOSE_LABELS', 'CHOOSE_MAP', 'CHOOSE_ZOOM']),
     ...mapActions(['RENDER_MAP']),
     saveMap: function () {
     }
   },
   watch: {
+    zoom: function () {
+      this.CHOOSE_ZOOM(this.zoom)
+    },
     mapColors: {
       deep: true,
       handler: function () { this.CHOOSE_MAPCOLORS(this.mapColors) }

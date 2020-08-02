@@ -5,12 +5,14 @@
     v-if="choosenMap === 'Europe'"
       v-bind:texts="texts"
       v-bind:labels="labels"
+      v-bind:zoom="zoomer"
       v-on:click.native="clickCountry($event)"
     />
         <World
         v-if="choosenMap === 'World'"
       v-bind:texts="texts"
       v-bind:labels="labels"
+      v-bind:zoom="zoomer"
       v-on:click.native="clickCountry($event)"
     />
     <div>{{ hoverCountryId }}</div>
@@ -38,6 +40,7 @@ export default {
       'choosenCountry',
       'texts',
       'labels',
+      'zoomer',
       'coloredCountry',
       'countryList',
       'choosenMap'

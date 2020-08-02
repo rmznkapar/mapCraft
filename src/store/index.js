@@ -15,6 +15,7 @@ export default new Vuex.Store({
       background: '#ffffff',
       strokeWidth: 0.400821
     },
+    zoomer: 1,
     texts: {
       title: 'Some Title In Here',
       desc: ''
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     },
     mapColors: state => {
       return state.mapColors
+    },
+    zoomer: state => {
+      return state.zoomer
     },
     texts: state => {
       return state.texts
@@ -79,6 +83,9 @@ export default new Vuex.Store({
     },
     CHOOSE_LABELCOLOR (state, color) {
       state.nowLabelColor = color
+    },
+    CHOOSE_ZOOM (state, zoomer) {
+      state.zoomer = zoomer
     },
     CHOOSE_MAP (state, map) {
       state.choosenMap = map

@@ -1,6 +1,7 @@
 <template>
   <div id="europe" class="tablo">
     <svg
+      :style="{ transform: 'scale('+ zoom +')'}"
       xmlns:dc="http://purl.org/dc/elements/1.1/"
       xmlns:cc="http://creativecommons.org/ns#"
       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -9846,7 +9847,7 @@
 <script>
 export default {
   name: 'Europe',
-  props: ['texts', 'labels'],
+  props: ['texts', 'labels', 'zoom'],
   data: function () {
     return {
       size: {
@@ -9864,6 +9865,20 @@ export default {
         width: '100%',
         x: -30,
         y: 1566 - 250
+      }
+    }
+  },
+  watch: {
+    zoom: function () {
+      const overf = document.getElementById('europe').style.overflow
+      if (this.zoom > 1) {
+        if (overf === 'auto') {
+          document.getElementById('europe').style.overflow = 'scroll'
+        } else {
+          document.getElementById('europe').style.overflow = 'auto'
+        }
+      } else {
+        document.getElementById('europe').style.overflow = 'hidden'
       }
     }
   }
