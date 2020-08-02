@@ -8,9 +8,9 @@
       xmlns="http://www.w3.org/2000/svg"
       xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
       xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-      viewBox="-29.947200 -100.986600 2754.066400 1396.573900"
+      viewBox="-29.947200 25.986600 2754.066400 1396.573900"
       version="1.0"
-      height="1396.573900"
+      height="1696.573900"
       width="2754.066400"
       id="svg3157"
       class="svgFull"
@@ -19,7 +19,7 @@
       sodipodi:docname="BlankMap-FlatWorld6.svg"
       inkscape:output_extension="org.inkscape.output.svg.inkscape"
     >
-          <rect id="background" width="100%" height="100%" y="70" fill="white" />
+          <rect id="background" width="100%" height="100%" y="70" x="-30" fill="white" />
 
       <sodipodi:namedview
         inkscape:window-height="1138"
@@ -9789,7 +9789,7 @@
       />
 </g>
 
-      <foreignObject id="foreign" style="overflow: visible;" :width="width" :height="height" :x="x" :y="y">
+      <foreignObject id="foreign" style="overflow: visible;" :width="foreignTitle.width" :height="foreignTitle.height" :x="foreignTitle.x" :y="foreignTitle.y">
         <div
           xmlns="http://www.w3.org/1999/xhtml"
           style="
@@ -9797,6 +9797,11 @@
             background: white;
             padding: 10px 20px;
             font-size: 50px;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
              text-align: center;"
           id="caption-box"
           ref="captionBox"
@@ -9804,45 +9809,36 @@
           <p class="title" style="font-weight: bold; text-align: center;">{{ texts.title }}</p>
           <p
             class="desc"
-            style="  font-weight: 400;
-    margin-top: 5px; text-align: center;"
+            style="
+            font-weight: 400;
+            margin-top: 5px;
+            font-size: 43px;
+            text-align: center;"
           >
             {{ texts.desc }}
           </p>
-          <!-- <ul id="label-box" class="label-box" style="list-style-type: none; padding: 0;">
-            <li
-              class="label"
-              style="  display: flex;
-                  text-align: -webkit-match-parent;
-    margin: 0px 2px;
-    padding: 5px 0px;"
-              v-for="label in labels"
-              :key="label.id"
-            >
-              <div
-                class="colorBox"
-                style="  display: inline-block;
-    flex: 0 0 auto;
-    width: 20px;
-    height: 20px;"
-                :style="{backgroundColor: label.color}"
-              ></div>
-              <span
-                class="label-text"
-                style="  margin-left: 5px;
-    margin-top: 1.25px;
-    font-size: 15px;
-    display: block;
-    max-width: 135px;
-    flex: 30 5 auto;
-    text-align: left;"
-                >{{ label.text }}</span
-              >
-            </li>
-          </ul> -->
         </div>
       </foreignObject>
-
+      <foreignObject style="
+      font-family: Avenir, Helvetica, Arial, sans-serif;
+      position: absolute;
+      bottom: 0px;
+      overflow: visible;
+      right: 125px;
+      background: white"
+      :width="foreignLabel.width" :height="foreignLabel.height" :x="foreignLabel.x" :y="foreignLabel.y">
+        <div style="
+          display: flex;
+          height: 100%;
+          width: 100%;
+          justify-content:center;
+        "
+        xmlns="http://www.w3.org/1999/xhtml">
+          <div v-for="label in labels" :key="label.id" style="flex-grow: 1;text-align:center;padding-top:15px;margin-top: 20px;border-top:15px solid;max-width:300px" :style="{borderColor: label.color}">
+            <p style=" font-size:32px; padding:10px;font-weight:600;">{{ label.text }}</p>
+          </div>
+        </div>
+      </foreignObject>
     </svg>
   </div>
 </template>
@@ -9853,10 +9849,22 @@ export default {
   props: ['texts', 'labels'],
   data: function () {
     return {
-      height: '100px',
-      width: '100%',
-      x: 0,
-      y: -40
+      size: {
+        height: '1696.573900',
+        width: '2754.066400'
+      },
+      foreignTitle: {
+        height: '200px',
+        width: '100%',
+        x: -30,
+        y: -125
+      },
+      foreignLabel: {
+        height: '250px',
+        width: '100%',
+        x: -30,
+        y: 1566 - 250
+      }
     }
   }
 }
