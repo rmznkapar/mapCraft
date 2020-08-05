@@ -9894,6 +9894,7 @@ export default {
   width: 97%;
   height: 100%;
   cursor: pointer;
+  transform-origin: left top;
   display: initial;
 }
 #europe::before{
